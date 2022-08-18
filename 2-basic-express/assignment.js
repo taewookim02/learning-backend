@@ -3,11 +3,13 @@ const express = require('express');
 const app = express();
 
 app.use('/users', (req, res, next) => {
-  res.send("<p>This is for 'users' </p>");
+  console.log('Hi I am middleware /users');
+  res.send("<p>This is for 'users'</p>");
 });
 
 app.use('/', (req, res, next) => {
-  res.send("<p>This is for '/' </p>");
+  console.log('Hi I am middleware /');
+  res.send("<p>This is for '/'</p>");
 });
 
 app.use((req, res, next) => {
