@@ -8,7 +8,7 @@ const requestHandler = (req, res) => {
     res.write('<html>');
     res.write('<head><title>Enter Message</title></head>');
     res.write(
-      '<body><form action="/message" method="POST"><input type="text" name="message"><button type="submit">Send</button></form></body>'
+      '<body><h1>Welcome!</h1><form action="/message" method="POST"><input type="text" name="message"><button type="submit">Send</button></form></body>'
     );
     res.write('</html>');
     return res.end();
@@ -23,7 +23,7 @@ const requestHandler = (req, res) => {
     return req.on('end', () => {
       const parsedBody = Buffer.concat(body).toString();
       const message = parsedBody.split('=')[1];
-      fs.writeFile('message.txt', message, err => {
+      fs.writeFile('1-basics/message.txt', message, err => {
         res.statusCode = 302;
         res.setHeader('Location', '/');
         return res.end();
@@ -39,6 +39,7 @@ const requestHandler = (req, res) => {
   res.end();
 };
 
+// Many ways of exporting
 // module.exports = requestHandler;
 
 // module.exports = {

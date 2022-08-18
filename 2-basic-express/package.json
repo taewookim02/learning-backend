@@ -1,7 +1,7 @@
 {
-  "name": "1-basics",
+  "name": "2-basic-express",
   "version": "1.0.0",
-  "description": "Complete Node.js Guide",
+  "description": "basic express usage",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
   }
 }
