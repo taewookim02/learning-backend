@@ -18,7 +18,7 @@ app.use('/admin', adminData.routes); //adminData because multiple exports
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).render('404', { pageTitle: '404 Error' });
+  res.status(404).render('404', { pageTitle: '404 Error: Page Not Found' });
 });
 
 app.listen(3000);
