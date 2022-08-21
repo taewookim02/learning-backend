@@ -1,0 +1,17 @@
+<%- include('includes/head.ejs') %>
+  <%- include('includes/navigation.ejs') %>
+    <h1>Exisiting users</h1>
+    <% if (userList.length> 0) { %>
+      <h3>Username:</h3>
+      <ul>
+        <% userList.forEach((user)=> { %>
+          <li>
+            <%= user %>
+          </li>
+          <% }) %>
+      </ul>
+      <% } else { %>
+        <h3>There are no existing users</h3>
+
+        <% } %>
+          <%- include('includes/end.ejs') %>
