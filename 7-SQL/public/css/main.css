@@ -8,11 +8,16 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
+  background-color: #444;
+  color: #fff;
 }
 
 main {
   padding: 1rem;
   margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 form {
@@ -213,4 +218,31 @@ form {
   #side-menu-toggle {
     display: none;
   }
+}
+
+.cart__item {
+  display: flex;
+  margin: 0 auto;
+  width: 50vw;
+  padding: 0 20px;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26);
+}
+
+.cart__item h1 {
+  font-size: 24px;
+}
+
+.cart__item-list {
+  padding: 0;
+}
+
+.danger {
+  color: #ff0000;
+  border: 1px solid #ff0000;
+}
+
+hr {
+  width: 100%;
 }
