@@ -28,18 +28,8 @@ exports.postAddProduct = (req, res, next) => {
     .catch(err => {
       console.log(err);
     });
-
-  // mysql2
-  // const product = new Product(null, title, imageUrl, description, price);
-  // product
-  //   .save()
-  //   .then(() => {
-  //     res.redirect('/');
-  //   })
-  //   .catch(err => console.log(err));
-  // res.redirect('/');
 };
-
+/*
 exports.getEditProduct = (req, res, next) => {
   const editMode = req.query.edit;
   if (!editMode) return res.redirect('/');
@@ -128,3 +118,4 @@ exports.postDeleteProduct = (req, res, next) => {
     });
   // Product.deleteById(prodId);
 };
+ */
