@@ -21,6 +21,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   User.findById('63161f4a32c7788b07bbc7d0')
     .then(user => {
+      console.log('DISPLAY USERCART', user.cart);
+      if (!user.cart) {
+        console.log('No cart.');
+        user.cart = { items: [] };
+      }
       req.user = new User(user.username, user.email, user.cart, user._id);
       next();
     })
