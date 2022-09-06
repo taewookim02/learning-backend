@@ -6,11 +6,11 @@ const shopController = require('../controllers/shop');
 
 const router = express.Router();
 
-// router.get('/', shopController.getIndex);
+router.get('/', shopController.getIndex);
 
-// router.get('/products', shopController.getProducts);
+router.get('/products', shopController.getProducts);
 
-// router.get('/products/:productId', shopController.getProduct); // : tells that that part is dynamic, & the cascading matters because : consumes the routes
+router.get('/products/:productId', shopController.getProduct); // : tells that that part is dynamic, & the cascading matters because : consumes the routes
 
 // router.get('/cart', shopController.getCart);
 
