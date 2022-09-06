@@ -63,16 +63,16 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-  // req.user
-  //   .getCart()
-  //   .then(products => {
-  //     res.render('shop/cart', {
-  //       path: '/cart',
-  //       pageTitle: 'Your Cart',
-  //       products: products,
-  //     });
-  //   })
-  //   .catch(err => console.log(err));
+  req.user
+    .getCart()
+    .then(products => {
+      res.render('shop/cart', {
+        path: '/cart',
+        pageTitle: 'Your Cart',
+        products: products,
+      });
+    })
+    .catch(err => console.log(err));
 };
 
 exports.postCart = (req, res, next) => {
@@ -111,9 +111,8 @@ exports.postOrder = (req, res, next) => {
 
 exports.getOrders = (req, res, next) => {
   req.user
-    .getOrders({ include: ['products'] }) // eager loading by Sequelize
+    .getOrders()
     .then(orders => {
-      console.log(orders);
       res.render('shop/orders', {
         path: '/orders',
         pageTitle: 'Your Orders',

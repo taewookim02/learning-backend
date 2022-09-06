@@ -12,7 +12,7 @@ router.get('/products', shopController.getProducts);
 
 router.get('/products/:productId', shopController.getProduct); // : tells that that part is dynamic, & the cascading matters because : consumes the routes
 
-// router.get('/cart', shopController.getCart);
+router.get('/cart', shopController.getCart);
 
 router.post('/cart', shopController.postCart);
 

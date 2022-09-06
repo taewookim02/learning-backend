@@ -1,4 +1,5 @@
 <%- include('../includes/head.ejs') %>
+
     </head>
 
     <body>
@@ -9,19 +10,18 @@
                     <% } else { %>
                         <ul>
                             <% orders.forEach(order=> { %>
-                                <li>
-                                    <h1># <%= order.id %>
-                                    </h1>
-                                    <ul>
-                                        <% order.products.forEach(product=> { %>
-                                            <li>
-                                                <%= product.title %> (<%= product.orderItem.quantity %>)
-                                            </li>
+                                <li><h1>Order - # <%= order._id %></h1></li>
+
+                                        <ul>
+                                            <% order.items.forEach(product=> { %>
+                                                <li>
+                                                    <%= product.title %> (<%= product.quantity %>)
+                                                </li>
                                             <% }); %>
-                                    </ul>
-                                </li>
+                                        </ul>
+                                    </li>
                                 <% }); %>
-                        </ul>
+                            </ul>
                         <% } %>
 
 
