@@ -43,22 +43,13 @@ exports.getIndex = (req, res, next) => {
     .catch(err => {
       console.log(err);
     });
-  // mysql
-  // Product.fetchAll()
-  //   .then(([rows, fieldData]) => {
-  //     res.render('shop/index', {
-  //       prods: rows,
-  //       pageTitle: 'Shop',
-  //       path: '/',
-  //     });
-  //   })
-  //   .catch(err => console.log(err));
 };
 
 exports.getCart = (req, res, next) => {
   req.user
-    .getCart()
-    .then(products => {
+    .populate('cart.items.productId')
+    .then(user => {
+      const products = user.cart.items;
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Your Cart',
