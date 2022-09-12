@@ -36,15 +36,6 @@ app.use(
   })
 ); //secret -> hashes
 
-app.use((req, res, next) => {
-  User.findById('631793d27d224127ea73b23b')
-    .then(user => {
-      req.user = user;
-      next();
-    })
-    .catch(err => console.log(err));
-});
-
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
