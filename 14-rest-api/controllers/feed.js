@@ -129,6 +129,11 @@ exports.updatePost = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
+      if (post.creator.toString() !== req.userId) {
+        const error = new Error('Not authorized');
+        error.statusCode = 403;
+        throw error;
+      }
       if (imageUrl !== post.imageUrl) {
         clearImage(post.imageUrl);
       }
@@ -157,12 +162,24 @@ exports.deletePost = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
+      if (post.creator.toString() !== req.userId) {
+        const error = new Error('Not authorized!');
+        error.statusCode = 403;
+        throw error;
+      }
       // Check logged in user
       clearImage(post.imageUrl);
       return Post.findOneAndDelete(postId);
     })
     .then(result => {
-      console.log(result);
+      return User.findById(req.userId);
+    })
+    .then(user => {
+      user.posts.pull(postId);
+      console.log('pulled');
+      return user.save();
+    }) // TODO: user.posts array not pulling
+    .then(result => {
       res.status(200).json({ message: 'Deleted post.' });
     })
     .catch(err => {
