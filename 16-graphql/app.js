@@ -1,5 +1,4 @@
 const path = require('path');
-const fs = require('fs');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -11,7 +10,7 @@ const cors = require('cors');
 const graphqlSchema = require('./graphql/schema');
 const graphqlResolver = require('./graphql/resolvers');
 const auth = require('./middleware/auth');
-const { clear } = require('console');
+const { clearImage } = require('./util/file');
 
 const app = express();
 
@@ -80,7 +79,7 @@ app.use(
     schema: graphqlSchema,
     rootValue: graphqlResolver,
     graphiql: true,
-    formatError(err) {
+    customFormatErrorFn(err) {
       if (!err.originalError) {
         return err;
       }
@@ -89,6 +88,11 @@ app.use(
       const code = err.originalError.code || 500;
       return { message: message, status: code, data: data };
     },
+    // customFormatErrorFn: error => ({
+    //   message: error.message || 'An error occurred',
+    //   code: error.originalError.code || 500,
+    //   data: error.originalError.data,
+    // }),
   })
 );
 
@@ -108,8 +112,3 @@ mongoose
     app.listen(8080);
   })
   .catch(err => console.log(err));
-
-const clearImage = filePath => {
-  filePath = path.join(__dirname, '..', filePath);
-  fs.unlink(filePath, err => console.log(err));
-};
