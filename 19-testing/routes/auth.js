@@ -1,78 +1,51 @@
 const express = require('express');
-const { check, body } = require('express-validator');
+const { body } = require('express-validator/check');
 
-const authController = require('../controllers/auth');
 const User = require('../models/user');
+const authController = require('../controllers/auth');
+const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
-router.get('/login', authController.getLogin);
-
-router.get('/signup', authController.getSignup);
-
-router.get('/reset', authController.getReset);
-
-router.post(
-  '/login',
-  [
-    check('email')
-      .isEmail()
-      .withMessage('Please enter a valid email')
-      .normalizeEmail(),
-    body(
-      'password',
-      'Please enter a password with only numbers and text and at least 5 characters'
-    )
-      .isLength({ min: 5 })
-      .isAlphanumeric()
-      .trim(),
-  ],
-  authController.postLogin
-);
-
-router.post(
+router.put(
   '/signup',
   [
-    check('email')
+    body('email')
       .isEmail()
-      .withMessage('Please enter a valid email')
+      .withMessage('Please enter a valid email.')
       .custom((value, { req }) => {
         return User.findOne({ email: value }).then(userDoc => {
           if (userDoc) {
-            return Promise.reject(
-              'E-Mail exists already, please pick a different one.'
-            );
+            return Promise.reject('E-Mail address already exists!');
           }
         });
       })
       .normalizeEmail(),
-
-    body(
-      'password',
-      'Please enter a password with only numbers and text and at least 5 characters'
-    )
-      .isLength({ min: 5 })
-      .isAlphanumeric()
-      .trim(),
-
-    body('confirmPassword')
-      .custom((value, { req }) => {
-        if (value !== req.body.password) {
-          throw new Error('Passwords have to match!');
-        }
-        return true;
-      })
-      .trim(),
+    body('password')
+      .trim()
+      .isLength({ min: 5 }),
+    body('name')
+      .trim()
+      .not()
+      .isEmpty()
   ],
-  authController.postSignup
+  authController.signup
 );
 
-router.post('/logout', authController.postLogout);
+router.post('/login', authController.login);
 
-router.post('/reset', authController.postReset);
+router.get('/status', isAuth, authController.getUserStatus);
 
-router.get('/reset/:token', authController.getNewPassword);
-
-router.post('/new-password', authController.postNewPassword);
+router.patch(
+  '/status',
+  isAuth,
+  [
+    body('status')
+      .trim()
+      .not()
+      .isEmpty()
+  ],
+  authController.updateUserStatus
+);
 
 module.exports = router;
