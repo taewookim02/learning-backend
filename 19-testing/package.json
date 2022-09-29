@@ -1,0 +1,41 @@
+{
+  "name": "2-basic-express",
+  "version": "1.0.0",
+  "description": "basic express usage",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "NODE_ENV=production MONGO_USER=user1 MONGO_PASSWORD=YRHtbQ6V3MzigPZX MONGO_DEFAULT_DATABASE=shop STRIPE_KEY=sk_test_51LjGskHwguMGisWOg6guqUJEu0rG8UGjETqweqRg9vtICsVW2hoorGiGyXUQSKgrJqMO1jDoTkXgQHTkvmoUI7GS00JZVbSp89 node app.js",
+    "start-server": "node app.js",
+    "start:dev": "nodemon app.js"
+  },
+  "author": "Tae Woo Kim",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^3.1.1",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.14.2",
+    "helmet": "^6.0.0",
+    "mongodb": "^4.9.1",
+    "mongoose": "^6.5.4",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.7.8",
+    "pdfkit": "^0.13.0",
+    "sequelize": "^6.21.4",
+    "stripe": "^10.10.0"
+  }
+}
